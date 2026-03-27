@@ -47,6 +47,39 @@ public class Service : IService
         await _dbContext.SaveChangesAsync();
         
         return "Create successful";
+    }
 
+    public async Task<List<Response.CategoryResponse>> GetAllCategoryResponse()
+    {
+        var query = _dbContext.Categories.Where(x => true);
+
+        query = query.OrderBy(x => x.name);
+
+        var SelectQuery = query.Select(x => new Response.CategoryResponse()
+        {
+            Name = x.name,
+            Id = x.Id,
+        });
+        
+        var results = await SelectQuery.ToListAsync();
+        
+        return results;
+    }
+
+    public async Task<List<Response.CategoryResponse>> GetCategoryByIdResponse(Guid id)
+    {
+        var query = _dbContext.Categories.Where(x => x.ParentId == id);
+
+        query = query.OrderBy(x => x.name);
+
+        var SelectQuery = query.Select(x => new Response.CategoryResponse()
+        {
+            Name = x.name,
+            Id = x.Id,
+        });
+        
+        var results = await SelectQuery.ToListAsync();
+        
+        return results;
     }
 }

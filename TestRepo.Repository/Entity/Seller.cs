@@ -6,7 +6,7 @@ public class Seller : BaseEntity<Guid>, IAuditablrEntity
 {
     public  string TaxCode { get; set; }
     public string CompanyAddress { get; set; }
-    public string CompanyName { get; set; } = "User";
+    public string CompanyName { get; set; }
     
     public Guid UserId { get; set; }
     public User User { get; set; }

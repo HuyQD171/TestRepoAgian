@@ -31,4 +31,17 @@ public class CategoryController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpGet("")]
+    public async Task<IActionResult> GetCategories()
+    {
+        var results = await _service.GetAllCategoryResponse();
+        return Ok(results);
+    }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCategoriesById(Guid id)
+    {
+        var results = await _service.GetCategoryByIdResponse(id);
+        return Ok(results);
+    }
 }

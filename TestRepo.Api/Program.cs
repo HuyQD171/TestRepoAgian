@@ -2,6 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using TestRepo.Api.Extensions;
 using TestRepo.Api.Middlewares;
 using TetPee.Repository;
+using TetPee.Repository.Entity;
+
+
+using SellerService = TetPee.Service.Seller;
+using IdentityService = TetPee.Service.Identity;
+using UserService = TetPee.Service.User;
 using CategoryService = TetPee.Service.Category;
 using JwtService = TetPee.Service.JwtService;
 
@@ -23,6 +29,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddJwtServices(builder.Configuration);
 builder.Services.AddSwaggerServices();
 
+builder.Services.AddScoped<SellerService.IService, SellerService.Service>();
+builder.Services.AddScoped<IdentityService.IService, IdentityService.Service>();
+builder.Services.AddScoped<UserService.IService, UserService.Service>();
 builder.Services.AddScoped<CategoryService.IService, CategoryService.Service>();
 builder.Services.AddScoped<JwtService.IService, JwtService.Service>();
 

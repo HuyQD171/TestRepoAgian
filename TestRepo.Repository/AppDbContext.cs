@@ -21,7 +21,7 @@ public class AppDbContext : DbContext
             builder.Property(x => x.Email)
                 .HasMaxLength(256)
                 .IsRequired();
-            builder.HasIndex(x => x.Password)
+            builder.HasIndex(x => x.Email)
                 .IsUnique();
             builder.Property(x => x.Password)
                 .HasMaxLength(256)
@@ -34,6 +34,16 @@ public class AppDbContext : DbContext
                 .WithOne(x => x.User)
                 .HasForeignKey<Seller>(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            var newUser = new User()
+            {
+                Id =  Guid.NewGuid(),
+                Email = "admin@gmail.com",
+                Password = "PiedTeam",
+                Role = "Admin",
+            };
+            
+            builder.HasData(newUser);
         });
 
         modelBuilder.Entity<Seller>(builder =>
