@@ -66,9 +66,6 @@ public class AppDbContext : DbContext
         
         modelBuilder.Entity<Category>(builder =>
         {
-            builder.Property(x => x.CompanyAddress)
-                .HasMaxLength(256)
-                .IsRequired();
             builder.Property(x => x.name)
                 .HasMaxLength(256)
                 .IsRequired();

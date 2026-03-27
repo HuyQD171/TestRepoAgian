@@ -5,8 +5,6 @@ namespace TetPee.Repository.Entity;
 public class Category : BaseEntity<Guid>, IAuditablrEntity
 {
     public string name { get; set; }
-    public string CompanyAddress { get; set; }
-    
     public Guid? ParentId { get; set; }
     public Category? Parent { get; set; }
     
